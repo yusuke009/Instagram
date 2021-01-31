@@ -11,7 +11,7 @@ import Firebase
 
 class PostData: NSObject {
     var id: String
-    var name: [String] = []
+    var name: String?
     var caption: String?
     var date: Date?
     var likes: [String] = []
@@ -23,9 +23,7 @@ class PostData: NSObject {
         
         let postDic = document.data()
         
-        if let name = postDic["name"] as? [String]{
-            self.name = name
-        }
+        self.name = postDic["name"] as? String
         
         self.caption = postDic["caption"] as? String
         

@@ -25,7 +25,8 @@ class CommentViewController: UIViewController {
         
         //FireStoreにコメントデータを保存する
         var updateValue: FieldValue
-        let comment = self.commentText.text!
+        let name = Auth.auth().currentUser!.displayName!
+        let comment = "\(name): \(self.commentText.text!)"
         updateValue = FieldValue.arrayUnion([comment])
         
         //コメントデータの保存場所を定義する
@@ -33,8 +34,8 @@ class CommentViewController: UIViewController {
         commentRef.updateData(["comment": updateValue])
         
         //nameの保存場所を定義する
-        let nameRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-        nameRef.updateData(["name": updateValue])
+        //let nameRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+        //nameRef.updateData(["name": updateValue])
         
         //HUDで投稿完了を表示する
         SVProgressHUD.showSuccess(withStatus: "投稿しました")
